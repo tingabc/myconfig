@@ -1,0 +1,65 @@
+# 与host的超时时间配置不同，ribbon只在使用serviceId路由时生效
+# 注意，ribbon的超时时间，跟hystrix超时时间，是哪个时间短哪个生效
+ribbon:
+  ReadTimeout: 700000
+  SocketTimeout: 700000
+
+
+# 熔断超时时间配置，当使用了熔断机制，最好配置该超时时间，避免部分相应时间较长的请求被熔断。
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 7000000
+
+# config logback
+logging:
+    # config: classpath:logback-spring.xml
+    # config 配置文件路径，设置成固定路径，这样全部服务使用同一个logback的配置文件
+    config: D:/project/khoa-config/dong/logback.xml
+    # 生成的日志文件目录
+    path: D:/project/OaLog
+    root: INFO, stdout
+    loglev: 0
+
+server:
+  # compression 在网关开启gzip压缩静态资源，仅会压缩1024字节以上的内容
+  compression:
+    enabled: true
+    mime-types: image/png,image/jpeg,image/jpg,text/html,text/xml,text/plain,text/css,application/javascript,application/octet-stream,application/json,application/xml,image/x-icon
+    min-response-size: 1024
+  undertow:
+    io-threads: 2
+    worker-threads: 16
+
+# token的超时时间，单位是分钟
+token:
+  timeout: 10
+
+# 是否开启netty、rabbitmq服务
+nettymq:
+  status: true
+
+# jwt 公用用户、密码
+jwt:
+  username: jwt123456
+  password: jwtpassword123456
+  # token过期时间 60*60*1000*7
+  exptime: 25200000
+
+# shiro 配置
+shiro:
+  filter: /static/**,/Api/**,/favicon.ico,/upmsUser/islogin,/sso/login,/nettymq-api/**,/concord/**
+  logout: /logout
+  authc: /**
+  loginUrl: http://127.0.0.1:1010/systemui-api/sso/login
+  sucessUrl: http://127.0.0.1:1010/systemui-api/index
+  errorUrl: http://127.0.0.1:1010/systemui-api/403
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100000000MB
+      max-request-size: 10000000MB

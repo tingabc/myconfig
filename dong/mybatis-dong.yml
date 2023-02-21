@@ -1,0 +1,13 @@
+# mybatis 配置
+
+mybatis:
+    # 实体类所在的包路径
+    type-aliases-package: com.tlcloud.**.entity.**
+    # mybatis配置文件的路径
+    mapper-locations: classpath:mapper/**/*.xml
+    # mybatis-plugins配置文件的路径
+    config-location: classpath:mybatis-sqlconfig.xml
+    configuration:
+        lazy-loading-enabled: false
+    # Mybatis-Plus中MapperScannerConfigurer无法通过Spring注解读取该值
+    #base-package: com.murong.**.dao,com.murong.**.service,com.murong.**.controller,com.murong.**.dbutil

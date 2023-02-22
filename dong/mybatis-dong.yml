@@ -7,7 +7,7 @@ mybatis:
     mapper-locations: classpath:mapper/**/*.xml
     # mybatis-plugins配置文件的路径
     config-location: classpath:mybatis-sqlconfig.xml
-    # 冲突
+    # 冲tu
 #    configuration:
 #        lazy-loading-enabled: false
     # Mybatis-Plus中MapperScannerConfigurer无法通过Spring注解读取该值
